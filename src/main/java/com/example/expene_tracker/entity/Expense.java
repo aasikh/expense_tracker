@@ -51,6 +51,4 @@ public class Expense {
     public String getDescription() {
         return description;
     }
-
-
 }
