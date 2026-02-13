@@ -34,6 +34,10 @@ public class ExpenseController {
        return expenseService.getExpenseById(id);
     }
 
-
+    @PutMapping("/{id}")
+    public Expense updateExpense(@PathVariable Long id, @RequestBody Expense expense){
+       expense.setId(id);
+       return expenseService.updateExpenseById(expense);
+    }
 
 }

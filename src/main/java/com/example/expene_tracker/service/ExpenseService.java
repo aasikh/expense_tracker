@@ -13,6 +13,7 @@ public class ExpenseService {
 
     private final ExpenseRepository expenseRepository;
     public ExpenseService(ExpenseRepository expenseRepository) {
+
         this.expenseRepository = expenseRepository;
     }
 
@@ -33,12 +34,25 @@ public class ExpenseService {
    // get fetching all the record from db
 
    public List<Expense> getExpenses(){
-      return expenseRepository.findAll();
+
+        return expenseRepository.findAll();
    }
 
    //get fetching single record from db
 
     public Optional<Expense> getExpenseById(Long id){
            return expenseRepository.findById(id);
+    }
+    // we are updating the expense using the id
+    public Expense updateExpenseById(Expense expense){
+
+        if (expense.getId() == null) {
+            throw new RuntimeException("id must not be null");
+        }
+
+        if(!expenseRepository.existsById(expense.getId())){
+          throw new RuntimeException("expense id not found");
+        }
+        return expenseRepository.save(expense);
     }
 }
