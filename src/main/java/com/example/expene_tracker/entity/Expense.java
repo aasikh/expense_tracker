@@ -1,5 +1,7 @@
 package com.example.expene_tracker.entity;
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.annotations.NotFound;
 
 import java.time.LocalDateTime;
 

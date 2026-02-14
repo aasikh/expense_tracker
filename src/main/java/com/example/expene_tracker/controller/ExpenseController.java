@@ -1,4 +1,5 @@
 package com.example.expene_tracker.controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -27,11 +28,14 @@ public class ExpenseController {
 
     @GetMapping
     public List<Expense> getAllExpenses(){
+
         return expenseService.getExpenses();
     }
+
     @GetMapping("/{id}")
     public Optional<Expense> getExpenseById(@PathVariable Long id){
-       return expenseService.getExpenseById(id);
+
+        return expenseService.getExpenseById(id);
     }
 
     @PutMapping("/{id}")
@@ -39,5 +43,9 @@ public class ExpenseController {
        expense.setId(id);
        return expenseService.updateExpenseById(expense);
     }
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteExpenseById(@PathVariable Long id){
+      expenseService.deleteExpenseById(id);
+      return ResponseEntity.noContent().build();
+    }
 }

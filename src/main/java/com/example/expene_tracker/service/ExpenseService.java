@@ -53,6 +53,26 @@ public class ExpenseService {
         if(!expenseRepository.existsById(expense.getId())){
           throw new RuntimeException("expense id not found");
         }
-        return expenseRepository.save(expense);
+
+               if(expense.getAmount() <= 0 ){
+                   throw new RuntimeException("amount must be greater than 0");
+               }
+                 if(expense.getCategory() == null){
+                   throw new RuntimeException("category must not be null");
+               }
+               if(!expense.getCategory().trim().equalsIgnoreCase("income") &&
+                       !expense.getCategory().trim().equalsIgnoreCase("expense")){
+                   throw new RuntimeException("category must not be income or expense");
+               }
+
+               return expenseRepository.save(expense);
     }
+        public void deleteExpenseById(Long id){
+
+        if(!expenseRepository.existsById(id)){
+
+            throw new RuntimeException("expense id not found");
+        }
+              expenseRepository.deleteById(id);
+        }
 }
