@@ -1,5 +1,7 @@
 package com.example.expene_tracker.controller;
 
+import com.example.expene_tracker.dto.RequestDto;
+import com.example.expene_tracker.dto.ResponseDto;
 import com.example.expene_tracker.service.UserService;
 import jakarta.validation.Valid;
 import com.example.expene_tracker.entity.User;
@@ -16,13 +18,15 @@ public class UserController {
     private final UserService userService;
 
     public UserController(UserService userService) {
+
         this.userService = userService;
     }
 
     @PostMapping("/register")
-    public User register(@Valid @RequestBody User user) {
-       return userService.register(user);
+    public ResponseDto register(@Valid @RequestBody RequestDto requestDto) {
+
+        return userService.register(requestDto);
     }
 
-
+// THIS IS UNFINISHED WORK FOR REGISTRATION
 }
