@@ -28,5 +28,10 @@ public class UserController {
         return userService.register(requestDto);
     }
 
+    @PostMapping("/login")
+    public ResponseDto login(@Valid @RequestBody RequestDto requestDto) {
+        return userService.login(requestDto);
+
+    }
 // THIS IS UNFINISHED WORK FOR REGISTRATION
 }
