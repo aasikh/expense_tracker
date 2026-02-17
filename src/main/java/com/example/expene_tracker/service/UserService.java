@@ -3,8 +3,11 @@ import com.example.expene_tracker.dto.RequestDto;
 import com.example.expene_tracker.dto.ResponseDto;
 import com.example.expene_tracker.entity.User;
 import com.example.expene_tracker.repository.UserRepositroy;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -34,4 +37,21 @@ response.setEmail(savedUser.getEmail());
 return  response;
 
     }
+    public ResponseDto login(RequestDto requestDto) {
+        Optional<User> userBox = userRepositroy.findByEmail(requestDto.getEmail());
+        if (userBox.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        User user = userBox.get();
+        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Passwords don't match");
+        }
+        ResponseDto response = new ResponseDto();
+        response.setId(user.getId());
+        response.setName(user.getName());
+        response.setEmail(user.getEmail());
+
+      return response;
+    }
+
 }
