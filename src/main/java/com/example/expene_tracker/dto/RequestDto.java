@@ -8,26 +8,23 @@ import jakarta.validation.constraints.Size;
 
 public class RequestDto {
     @Pattern(regexp = "^[a-zA-Z\\s]*$")
-    @Column(nullable = false, name = "Name" , length = 255)
     private String name;
 
     @Email
     @NotBlank
-    @Column(nullable = false, unique = true, name="Email" )
     private String email;
 
     @NotBlank
     @Size(min = 6)
-    @Column(nullable = false, name="Password")
     private String password;
 
-public String getName() {
-	return name;
+  public String getName() {
+	 return name;
 }
-public void setName(String name) {
+  public void setName(String name) {
 	this.name = name;
 }
-public String getEmail() {
+  public String getEmail() {
     return  email;
 }
 
