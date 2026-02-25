@@ -1,7 +1,10 @@
 package com.example.expene_tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="Users")
@@ -23,7 +26,9 @@ public class User {
     @Size(min = 6)
     @Column(nullable = false, name="Password")
     private String password;
-
+@OneToMany(mappedBy = "user")
+@JsonIgnore
+private List<Expense> expense;
 // getter and setter
 
     public Long getId() {
@@ -56,5 +61,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Expense> getExpense() {
+        return expense;
+    }
+
+    public void setExpense(List<Expense> expense) {
+        this.expense = expense;
     }
 }

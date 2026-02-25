@@ -23,7 +23,9 @@ public class Expense {
     private String description;
 
     private LocalDateTime date;
-
+@ManyToOne
+@JoinColumn(name="user_id")
+private User user;
     //gatter and setter
 
     public Long getId() {
@@ -52,6 +54,14 @@ public class Expense {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDescription() {

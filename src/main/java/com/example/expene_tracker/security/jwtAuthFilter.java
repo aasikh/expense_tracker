@@ -1,5 +1,6 @@
 package com.example.expene_tracker.security;
 
+import com.example.expene_tracker.service.UserService;
 import com.example.expene_tracker.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -37,7 +38,6 @@ public class jwtAuthFilter extends OncePerRequestFilter {
             try {
                 Claims claims = jwtUtil.extractClaims(token);
                 String userId = claims.getSubject();
-
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(userId, null, new ArrayList<>());
 
